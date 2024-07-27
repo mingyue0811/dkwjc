@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>违禁词检测对抗网页</title>
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f7f7f7;
+    }
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #inputField {
+      margin-right: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 200px; /* 设置输入框宽度 */
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #outputField {
+      font-family: 'Courier New', monospace;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      color: #333;
+      font-size: 16px;
+      white-space: pre-wrap; /* 保持中文换行 */
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>违禁词检测对抗网页</h2>
+   
+    <label for="inputField">输入内容：</label>
+    <input type="text" id="inputField" placeholder="输入内容">
+    <button onclick="reverseAndEncode()">颠倒并编码</button>
+   
+    <p>输出结果：</p>
+    <div id="outputField"></div>
+</div>
+
+<script>
+function reverseAndEncode() {
+    // 获取用户输入
+    var userInput = document.getElementById('inputField').value;
+    // 颠倒字符串
+    var reversed = userInput.split('').reverse().join('');
+    // 将字符串转换为unicode编码
+    var unicodeEncoded = unescape(encodeURIComponent(reversed));
+    // 拼接特定的Unicode字符
+    var finalOutput = '\u202e\u202e\u202e\u202e\u202e\u003' + unicodeEncoded;
+    // 输出结果
+    document.getElementById('outputField').textContent = finalOutput;
+}
+</script>
+
+</body>
+</html>
